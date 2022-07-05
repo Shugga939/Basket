@@ -1,9 +1,9 @@
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import calculateDiscount from "../helpers/calculateDiscount";
 import { ADD_ITEM } from "../store/goodsStore";
 
-
-function Form() {
+function Form ({isDiscount,discount}) {
 
   const dispath = useDispatch()
   const idRef = useRef(null)
@@ -48,14 +48,23 @@ function Form() {
   
   const addItem = (e) => {
     e.preventDefault()
-
+    console.log(goods);
+    
     if (validation()) {
-      dispath(ADD_ITEM({
-        id: idRef.current.value, 
-        name: nameRef.current.value, 
-        price: priceRef.current.value,
-        newPrice: null
-      }))
+      isDiscount? 
+        dispath(ADD_ITEM({
+          id: idRef.current.value, 
+          name: nameRef.current.value, 
+          price: priceRef.current.value,
+          newPrice: calculateDiscount (priceRef.current.value, discount)
+        }))
+      : 
+        dispath(ADD_ITEM({
+          id: idRef.current.value, 
+          name: nameRef.current.value, 
+          price: priceRef.current.value,
+          newPrice: null
+        }))
       idRef.current.value = ''
       nameRef.current.value = ''
       priceRef.current.value = ''

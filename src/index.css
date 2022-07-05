@@ -135,7 +135,12 @@ body {
   margin: 0px auto;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   max-width: 600px;
+}
+
+.discount button {
+  margin: 0px 5px;
 }
 
 .discount__input {
@@ -143,4 +148,8 @@ body {
   height: 35px;
   width: 250px;
   margin-right: 20px;
+}
+
+.summary s {
+  margin-right: 5px;
 }

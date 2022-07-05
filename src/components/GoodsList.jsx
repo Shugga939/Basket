@@ -3,13 +3,10 @@ import List from "./List";
 import { useDispatch, useSelector } from "react-redux";
 import { REMOVE_ITEM } from "../store/goodsStore";
 
-
-
 function GoodsList() {
   
   const dispath = useDispatch()
   const goods = useSelector(state=>state)
-
 
   const deleteItem = (id)=> {
     dispath(REMOVE_ITEM(id))

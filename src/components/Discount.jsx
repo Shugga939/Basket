@@ -1,18 +1,23 @@
-import { useRef } from "react"
 import { useDispatch } from "react-redux"
-import { CALCULATE_DISCOUNT } from "../store/goodsStore"
+import { CALCULATE_DISCOUNT, ZEROING_DISCOUNT } from "../store/goodsStore"
 
-function Discount() {
+function Discount({setIsDiscount, discountRef}) {
   
   const dispath = useDispatch()
-  const unputRef = useRef('')
 
   let calculateDiscount = (e) => {
     e.preventDefault()
-    dispath(CALCULATE_DISCOUNT(Number (unputRef.current.value)))
-    
+    if (discountRef.current.value >0 && discountRef.current.value<101) {
+      dispath(CALCULATE_DISCOUNT(Number (discountRef.current.value)))
+      setIsDiscount(true)
+    }
   }
 
+  let zeroingDiscount = (e) => {
+    e.preventDefault()
+    dispath(ZEROING_DISCOUNT())
+    setIsDiscount(false)
+  }
 
   return (
     <>
@@ -21,7 +26,7 @@ function Discount() {
           type="number" 
           className="discount__input"
           placeholder="Величина скидки в %"
-          ref={unputRef}
+          ref={discountRef}
         />
         <button
           type="submit"
@@ -32,6 +37,7 @@ function Discount() {
         <button
           type="button"
           className="btn"
+          onClick={zeroingDiscount}
         > Убрать скидки
         </button>
       </form>

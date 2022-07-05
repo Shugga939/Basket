@@ -8,7 +8,7 @@ function Card ({id, name, price, deleteItem, newPrice}) {
         {newPrice?  
           <span> <s> {price} </s> {newPrice} </span>
         :
-          <span>  {price} </span>
+          <span> {price} </span>
         }
       </span>
       <button 
